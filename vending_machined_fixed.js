@@ -35,7 +35,7 @@ function VendingMachine(items, prices)
             /*if(this.items.length <= 5)
             {
                 console.log("incorrect number");*/
-            }
+            // }
 			console.log(i +  ". " + this.items[i] +  " [$" + this.prices[i] + "]");
 		}
 	}
@@ -80,7 +80,7 @@ function VendingMachine(items, prices)
 			
 			console.log("Just accepted ", floatCents, " worth of coins\n");
 			
-		}while(coinSum === price * numItems);
+		}while(coinSum != price * numItems);
 		
 		// Enough money! 
 		if(Math.floor(coinSum / price) >= numItems)
@@ -145,7 +145,7 @@ function VendingMachine(items, prices)
 		}
 		
 		// The amount of dollars
-		dollars = Math.floor(pennyAmount / 100);
+		let dollars = Math.floor(pennyAmount / 100);
 		
 		// How much money is left over
 		var penniesLeftOver = pennyAmount % (dollars * 100);
@@ -186,8 +186,8 @@ function VendingMachine(items, prices)
 	{
 		this.itemRequest();	
 	}
-}
 
+}
 var vm = new VendingMachine(["Water", "Soda", "Pizza", "Taco", "Tesla"], [.50, .99, 1.99, 3.99, 850000.00]);
 
 
