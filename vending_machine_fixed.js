@@ -23,19 +23,17 @@ function VendingMachine(items, prices)
 		console.log("Welcome to our flawless and secure vending experience!");
 
 		// Print Woot twice
-		for(var i = 0; i < 2; ++i)
+		for(let i = 0; i < 2; ++i)
 		{
 			console.log("Woot!");
 		}
 		
 		// Prints all the items
-		for(var i = 0; i < this.items.length; i++)
+		for(let i = 0; i < this.items.length; i++)
 		{
 			console.log(i + ". " + this.items[i] +  " [$" + this.prices[i] + "]");
 		}
 	}
-	
-	
 	
 	// ------------------------------------
 	// Accepts coins
@@ -45,8 +43,8 @@ function VendingMachine(items, prices)
 	this.inputCoins = function(item, price, numItems)
 	{
 		// The coin sum
-		var coinSum = 0.0;
-		var change = 0;
+		let coinSum = 0.0;
+		let change = 0;
 
 		do
 		{
@@ -63,6 +61,12 @@ function VendingMachine(items, prices)
 			if(insertedCents == "v")
 			{
 				break;
+			}
+			else if (/[a-zA-z]/.test (insertedCents)) {
+
+				console.log (" not a valid option");
+				break;
+
 			}
 			// Looks like money was deposited
 			else
@@ -107,15 +111,24 @@ function VendingMachine(items, prices)
 		this.showMenu();
 		
 		// The item number
-		var itemNum = readline.question("Please enter the item number: ");
+		let itemNum = readline.question("Please enter the item number: ");
+		
+        if(itemNum < this.items.length)
+        {
 				
 		console.log("You selected item: ", itemNum);
+
+        }else 
+        {
+            console.log("Wrong item number try again");
+            return ;
+        }
 		
 		// If this is a bulk purchase, then show the menu
-		var numItemsStr = readline.question("How many " + this.items[itemNum] + "(s) would you like to purchase? ");
+		let numItemsStr = readline.question("How many " + this.items[itemNum] + "(s) would you like to purchase? ");
 
 		// Get the number of items
-		var numItems = parseInt(numItemsStr);
+		let numItems = parseInt(numItemsStr);
 		
 		console.log("You requested: ", numItems, " ", this.items[itemNum].toLowerCase(), "(s) which costs " + this.prices[itemNum] * numItems);
 				
@@ -135,10 +148,10 @@ function VendingMachine(items, prices)
 	this.returnMoney = function(amount)
 	{
 		// The amount in cents
-		var pennyAmount = amount;
+		let pennyAmount = amount;
 		
 		// The amount of bills, quarters, dimes, nickles, and cents to return
-		var bills = 0, quarters = 0, dimes = 0, nickles = 0, cents = 0;
+		let bills = 0, quarters = 0, dimes = 0, nickles = 0, cents = 0;
 		
 		// Do we have more than a dollar bill?
 		// If so, then lets convert to cents
@@ -148,10 +161,10 @@ function VendingMachine(items, prices)
 		}
 		
 		// The amount of dollars
-		dollars = Math.floor(pennyAmount / 100);
+		let dollars = Math.floor(pennyAmount / 100);
 		
 		// How much money is left over
-		var penniesLeftOver = pennyAmount % (dollars * 100);
+		let penniesLeftOver = pennyAmount % (dollars * 100);
 		
 		// Let's figure the number of quarters
 		quarters = Math.floor(penniesLeftOver / 25)
@@ -181,7 +194,6 @@ function VendingMachine(items, prices)
 		console.log(nickles, " nickles");
 		console.log(cents, " cents");
 		
-		
 	}
 	
 	// Turns on the vending machine
@@ -191,9 +203,7 @@ function VendingMachine(items, prices)
 	}
 }
 
-var vm = new VendingMachine(["Water", "Soda", "Pizza", "Taco", "Tesla"], [.50, .99, 1.99, 3.99, 850000.00]);
+let vm = new VendingMachine(["Water", "Soda", "Pizza", "Taco", "Tesla"], [.50, .99, 1.99, 3.99, 850000.00]);
 
 
 vm.turnOn();
-
-
