@@ -1,5 +1,4 @@
 // For reading the keyboard input
-"use strict";
 const readline = require('readline-sync');
 
 //---------------------------------------------
@@ -30,13 +29,9 @@ function VendingMachine(items, prices)
 		}
 		
 		// Prints all the items
-		for(var i = 0; i < this.items.length; ++i)
+		for(var i = 0; i < this.items.length; i++)
 		{
-            /*if(this.items.length <= 5)
-            {
-                console.log("incorrect number");*/
-            // }
-			console.log(i +  ". " + this.items[i] +  " [$" + this.prices[i] + "]");
+			console.log(i + ". " + this.items[i] +  " [$" + this.prices[i] + "]");
 		}
 	}
 	
@@ -51,7 +46,8 @@ function VendingMachine(items, prices)
 	{
 		// The coin sum
 		var coinSum = 0.0;
-			
+		var change = 0;
+
 		do
 		{
 			// Get the money
@@ -82,15 +78,22 @@ function VendingMachine(items, prices)
 			
 		}while(coinSum != price * numItems);
 		
-		// Enough money! 
-		if(Math.floor(coinSum / price) >= numItems)
-		{
-			console.log("Please claim you ", numItems, " ", item , "(s).  Also, returning to you the sum of ", coinSum - ((numItems * price))); 
-		}
-		// Not enough money
-		else
-		{
-			console.log("Sorry, insufficient funds!");
+			if (insertedCents == "v") {
+
+				// Enough money! 
+				if(Math.floor(coinSum / price) >= numItems)
+				{	
+					change = coinSum - (numItems * price);
+					change = change.toFixed(2);
+					console.log("Please claim you ", numItems, " ", item , "(s).  Also, returning to you the sum of ", change); 
+				}
+				// Not enough money
+				else
+				{
+					console.log("Sorry, insufficient funds!");
+
+				}
+		
 			
 		}
 		
@@ -145,7 +148,7 @@ function VendingMachine(items, prices)
 		}
 		
 		// The amount of dollars
-		let dollars = Math.floor(pennyAmount / 100);
+		dollars = Math.floor(pennyAmount / 100);
 		
 		// How much money is left over
 		var penniesLeftOver = pennyAmount % (dollars * 100);
@@ -186,8 +189,8 @@ function VendingMachine(items, prices)
 	{
 		this.itemRequest();	
 	}
-
 }
+
 var vm = new VendingMachine(["Water", "Soda", "Pizza", "Taco", "Tesla"], [.50, .99, 1.99, 3.99, 850000.00]);
 
 
